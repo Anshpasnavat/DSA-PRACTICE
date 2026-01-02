@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int sumOfDigits(int n) {
+        int sum = 0;
+        while (n > 0) {
+            sum += n % 10;
+            n /= 10;
+        }
+        return sum;
+    }
+};
+
+// for local testing only
+int main() {
+    Solution s;
+    cout << s.sumOfDigits(402);
+    return 0;
+}
