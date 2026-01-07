@@ -1,0 +1,19 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    int addition(int A, int B) {
+        return A + B;
+    }
+};
+
+int main() {
+    int A, B;
+    cin >> A >> B;
+
+    Solution s;
+    cout << s.addition(A, B);
+
+    return 0;
+}
