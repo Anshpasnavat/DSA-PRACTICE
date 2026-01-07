@@ -1,0 +1,20 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    long long findSum(long long n) {
+        return (n * (n + 1)) / 2;
+    }
+};
+
+// 👇 main() ONLY for VS Code testing
+int main() {
+    long long n;
+    cin >> n;
+
+    Solution s;
+    cout << s.findSum(n);
+
+    return 0;
+}
