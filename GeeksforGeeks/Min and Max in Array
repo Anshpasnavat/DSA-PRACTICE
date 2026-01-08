@@ -1,0 +1,32 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    pair<long long, long long> getMinMax(long long arr[], int n) {
+        long long mn = arr[0];
+        long long mx = arr[0];
+
+        for (int i = 1; i < n; i++) {
+            mn = min(mn, arr[i]);
+            mx = max(mx, arr[i]);
+        }
+
+        return {mn, mx};
+    }
+};
+
+int main() {
+    int n;
+    cin >> n;
+
+    long long arr[n];
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
+
+    Solution s;
+    pair<long long, long long> res = s.getMinMax(arr, n);
+
+    cout << res.first << " " << res.second;
+    return 0;
+}

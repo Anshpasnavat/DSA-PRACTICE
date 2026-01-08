@@ -1,0 +1,35 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+class Solution {
+public:
+    long long int floorSqrt(long long int n) {
+        if (n == 0 || n == 1)
+            return n;
+
+        long long low = 1, high = n, ans = 0;
+
+        while (low <= high) {
+            long long mid = low + (high - low) / 2;
+
+            if (mid <= n / mid) {   // mid*mid <= n (overflow safe)
+                ans = mid;
+                low = mid + 1;
+            } else {
+                high = mid - 1;
+            }
+        }
+
+        return ans;   // ✅ inside function
+    }
+};
+
+int main() {
+    long long n;
+    cin >> n;
+
+    Solution s;
+    cout << s.floorSqrt(n);
+
+    return 0;
+}
