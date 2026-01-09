@@ -11,14 +11,14 @@ int main() {
     for(int i = 0; i < n; i++){
         cin >> arr[i];
     }
-    int min = arr[0];
+    int max = arr[0];
 
     for(int i = 0; i < n; i++){
-        if(arr[i]<min){
-            min = arr[i];
+        if(arr[i]>max){
+            max = arr[i];
         }    
     }
-    cout <<"your smallest value is: " << min;
+    cout <<"your largest value is: " << max;
 
     return 0;
 }
