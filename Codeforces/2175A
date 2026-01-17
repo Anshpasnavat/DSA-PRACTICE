@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() {
+    ios::sync_with_stdio(false);
+    cin.tie(NULL);
+
+    int t;
+    cin >> t;
+
+    while (t--) {
+        long long n, m, k;
+        cin >> n >> m >> k;
+
+        bool ok = false;
+
+        // only vertical strokes
+        if (k % m == 0 && k / m <= n)
+            ok = true;
+
+        // only horizontal strokes
+        if (k % n == 0 && k / n <= m)
+            ok = true;
+
+        cout << (ok ? "YES\n" : "NO\n");
+    }
+
+    return 0;
+}
