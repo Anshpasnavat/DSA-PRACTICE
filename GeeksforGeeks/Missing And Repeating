@@ -1,0 +1,27 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Solution {
+public:
+    vector<int> findTwoElement(vector<int>& arr) {
+        int n = arr.size();
+
+        long long sumN = (long long)n * (n + 1) / 2;
+        long long sumSqN = (long long)n * (n + 1) * (2 * n + 1) / 6;
+
+        long long sum = 0, sumSq = 0;
+        for (int x : arr) {
+            sum += x;
+            sumSq += (long long)x * x;
+        }
+
+        long long diff = sum - sumN;           // R - M
+        long long diffSq = sumSq - sumSqN;     // R^2 - M^2
+
+        long long sumRM = diffSq / diff;       // R + M
+
+        long long R = (diff + sumRM) / 2;
+        long long M = sumRM - R;
+
+        return {(int)R, (int)M};   // {repeating, missing}
+    }
+};
