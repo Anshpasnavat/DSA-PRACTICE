@@ -1,0 +1,33 @@
+#include <bits/stdc++.h>
+using namespace std;
+class Solution {
+public:
+    vector<int> findSubarray(vector<int>& arr) {
+        long long maxSum = -1, currSum = 0;
+        int currLen = 0, maxLen = 0;
+
+        vector<int> curr, ans;
+
+        for(int i = 0; i < arr.size(); i++) {
+            if(arr[i] >= 0) {
+                currSum += arr[i];
+                curr.push_back(arr[i]);
+                currLen++;
+
+                if(currSum > maxSum || 
+                  (currSum == maxSum && currLen > maxLen)) {
+                    maxSum = currSum;
+                    maxLen = currLen;
+                    ans = curr;
+                }
+            } else {
+                currSum = 0;
+                currLen = 0;
+                curr.clear();
+            }
+        }
+
+        if(ans.empty()) return {-1};
+        return ans;
+    }
+};
