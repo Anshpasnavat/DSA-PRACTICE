@@ -1,43 +1,56 @@
-class Solution {
-public:
-    static const int MOD = 1e9 + 7;
+#include <bits/stdc++.h>
+using namespace std;
 
-    int countPartitions(vector<int>& nums, int k) {
-        int n = nums.size();
+static const int MOD = 1e9 + 7;
 
-        vector<long long> dp(n + 1, 0), prefix(n + 1, 0);
-        dp[0] = 1;
-        prefix[0] = 1;
+int countPartitions(vector<int>& nums, int k) {
+    int n = nums.size();
 
-        deque<int> maxD, minD;
-        int l = 0;
+    vector<long long> dp(n + 1, 0), prefix(n + 1, 0);
+    dp[0] = 1;              // empty prefix
+    prefix[0] = 1;
 
-        for (int r = 0; r < n; r++) {
-            // maintain max deque
-            while (!maxD.empty() && nums[maxD.back()] < nums[r])
-                maxD.pop_back();
-            maxD.push_back(r);
+    deque<int> maxD, minD;
+    int l = 0;
 
-            // maintain min deque
-            while (!minD.empty() && nums[minD.back()] > nums[r])
-                minD.pop_back();
-            minD.push_back(r);
+    for (int r = 0; r < n; r++) {
+        // maintain max deque
+        while (!maxD.empty() && nums[maxD.back()] <= nums[r])
+            maxD.pop_back();
+        maxD.push_back(r);
 
-            // shrink window if invalid
-            while (nums[maxD.front()] - nums[minD.front()] > k) {
-                if (maxD.front() == l) maxD.pop_front();
-                if (minD.front() == l) minD.pop_front();
-                l++;
-            }
+        // maintain min deque
+        while (!minD.empty() && nums[minD.back()] >= nums[r])
+            minD.pop_back();
+        minD.push_back(r);
 
-            // dp transition
-            long long val = prefix[r];
-            if (l > 0) val = (val - prefix[l - 1] + MOD) % MOD;
-
-            dp[r + 1] = val;
-            prefix[r + 1] = (prefix[r] + dp[r + 1]) % MOD;
+        // shrink window until valid
+        while (!maxD.empty() && !minD.empty() &&
+               nums[maxD.front()] - nums[minD.front()] > k) {
+            if (maxD.front() == l) maxD.pop_front();
+            if (minD.front() == l) minD.pop_front();
+            l++;
         }
 
-        return dp[n];
+        // dp[r+1] = sum of dp[l..r]
+        long long leftSum = (l > 0) ? prefix[l - 1] : 0;
+        dp[r + 1] = (prefix[r] - leftSum + MOD) % MOD;
+
+        prefix[r + 1] = (prefix[r] + dp[r + 1]) % MOD;
     }
-};
+
+    return dp[n];
+}
+
+// Example usage
+int main() {
+    vector<int> nums1 = {9, 4, 1, 3, 7};
+    int k1 = 4;
+    cout << countPartitions(nums1, k1) << endl; // 6
+
+    vector<int> nums2 = {3, 3, 4};
+    int k2 = 0;
+    cout << countPartitions(nums2, k2) << endl; // 2
+
+    return 0;
+}
