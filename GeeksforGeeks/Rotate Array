@@ -1,0 +1,25 @@
+class Solution {
+public:
+    void rotateArr(vector<int>& arr, int d) {
+        int n = arr.size();
+        
+        // step 1: handle large d
+        d = d % n;
+        
+        // step 2: store first d elements
+        vector<int> temp(d);
+        for(int i = 0; i < d; i++) {
+            temp[i] = arr[i];
+        }
+        
+        // step 3: shift remaining elements left
+        for(int i = d; i < n; i++) {
+            arr[i - d] = arr[i];
+        }
+        
+        // step 4: put temp elements at end
+        for(int i = 0; i < d; i++) {
+            arr[n - d + i] = temp[i];
+        }
+    }
+};
