@@ -1,20 +1,52 @@
 #include <bits/stdc++.h>
 using namespace std;
- int main(){
-    int arr[]= {1,2,3,4,5};
-    int n = sizeof(arr)/sizeof(int);
-    int maxSum = INT_MIN;
 
-    for(int i = 0; i<n; i++){
-        for(int j =i;j<n;j++){
-            int currSum = 0;
-            for (int k = i; k <= j; k++){
-                currSum  += arr[k];
-            }
-            maxSum = max(maxSum, currSum);
-            
+static const int MOD = 1e9 + 7;
+
+int countPartitions(vector<int>& nums, int k) {
+    int n = nums.size();
+
+    vector<long long> dp(n + 1, 0), prefix(n + 1, 0);
+    dp[0] = 1;              // empty prefix
+    prefix[0] = 1;
+
+    deque<int> maxD, minD;
+    int l = 0;
+
+    for (int r = 0; r < n; r++) {
+        // maintain max deque
+        while (!maxD.empty() && nums[maxD.back()] <= nums[r])
+            maxD.pop_back();
+        maxD.push_back(r);
+
+        // maintain min deque
+        while (!minD.empty() && nums[minD.back()] >= nums[r])
+            minD.pop_back();
+        minD.push_back(r);
+
+        // shrink window until valid
+        while (!maxD.empty() && !minD.empty() &&
+               nums[maxD.front()] - nums[minD.front()] > k) {
+            if (maxD.front() == l) maxD.pop_front();
+            if (minD.front() == l) minD.pop_front();
+            l++;
         }
-         
+
+        // dp[r+1] = sum of dp[l..r]
+        long long leftSum = (l > 0) ? prefix[l - 1] : 0;
+        dp[r + 1] = (prefix[r] - leftSum + MOD) % MOD;
+
+        prefix[r + 1] = (prefix[r] + dp[r + 1]) % MOD;
     }
-    cout << maxSum ; 
+
+    return dp[n];
+}
+
+// Example usage
+int main() {
+    vector<int> nums1 = {7, 2};
+    int k1 = 0;
+    cout << countPartitions(nums1, k1) << endl; 
+
+    return 0;
 }

@@ -1,0 +1,22 @@
+class Solution {
+public:
+    vector<vector<int>> ans;
+    vector<int> temp;
+
+    void backtrack(int index, vector<int>& nums) {
+        // current subset add karo
+        ans.push_back(temp);
+
+        // aage ke elements try karo
+        for (int i = index; i < nums.size(); i++) {
+            temp.push_back(nums[i]);      // include
+            backtrack(i + 1, nums);       // recursion
+            temp.pop_back();              // exclude (backtrack)
+        }
+    }
+
+    vector<vector<int>> subsets(vector<int>& nums) {
+        backtrack(0, nums);
+        return ans;
+    }
+};
