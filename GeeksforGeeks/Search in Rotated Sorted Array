@@ -1,10 +1,27 @@
 class Solution {
-  public:
+public:
     int search(vector<int>& arr, int key) {
-        // Code Here
-        for(int i=0;i<arr.size();i++){
-            if(arr[i]==key){
-                return i;
+        int low = 0, high = arr.size() - 1;
+
+        while (low <= high) {
+            int mid = low + (high - low) / 2;
+
+            if (arr[mid] == key)
+                return mid;
+
+            // Left half sorted
+            if (arr[low] <= arr[mid]) {
+                if (key >= arr[low] && key < arr[mid])
+                    high = mid - 1;
+                else
+                    low = mid + 1;
+            }
+            // Right half sorted
+            else {
+                if (key > arr[mid] && key <= arr[high])
+                    low = mid + 1;
+                else
+                    high = mid - 1;
             }
         }
         return -1;
