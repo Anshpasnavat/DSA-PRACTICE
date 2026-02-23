@@ -1,0 +1,20 @@
+class Solution {
+public:
+    vector<int> singleNumber(vector<int>& nums) {
+        int xo = 0;
+        for (int n : nums) xo ^= n;
+
+        // FIX: avoid negating INT_MIN
+        long long diff = (long long)xo & (-(long long)xo);
+
+        int a = 0, b = 0;
+        for (int n : nums) {
+            if (n & diff)
+                a ^= n;
+            else
+                b ^= n;
+        }
+
+        return {a, b};
+    }
+};
