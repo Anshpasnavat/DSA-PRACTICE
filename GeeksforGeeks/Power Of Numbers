@@ -1,0 +1,30 @@
+class Solution {
+  public:
+  
+    long long reverseNum(long long n){
+        long long rev = 0;
+        
+        while(n > 0){
+            rev = rev * 10 + n % 10;
+            n = n / 10;
+        }
+        
+        return rev;
+    }
+  
+    long long power(long long base, long long exp){
+        long long result = 1;
+        
+        while(exp > 0){
+            result = result * base;
+            exp--;
+        }
+        
+        return result;
+    }
+  
+    int reverseExponentiation(int n) {
+        long long rev = reverseNum(n);
+        return power(n, rev);
+    }
+};
