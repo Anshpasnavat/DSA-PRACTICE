@@ -1,0 +1,17 @@
+class Solution {
+public:
+    vector<int> getRow(int rowIndex) {
+        vector<int>answer(1,1);
+        rowIndex;
+        while(rowIndex>0){rowIndex--;
+            int prev=1;
+            for(int i=1;i<answer.size();i++){
+               int p=answer[i];
+               answer[i]=answer[i]+prev;
+               prev=p;
+            }
+            answer.push_back(1);
+        }
+        return answer;
+    }
+};
