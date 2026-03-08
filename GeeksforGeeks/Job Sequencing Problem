@@ -1,0 +1,40 @@
+class Solution {
+  public:
+  
+    int find(vector<int> &parent, int s){
+        if(parent[s] == s)
+            return s;
+        return parent[s] = find(parent, parent[s]);
+    }
+  
+    vector<int> jobSequencing(vector<int> &deadline, vector<int> &profit) {
+        int n = deadline.size();
+        
+        vector<pair<int,int>> jobs;
+        for(int i=0;i<n;i++)
+            jobs.push_back({profit[i], deadline[i]});
+        
+        sort(jobs.begin(), jobs.end(), greater<pair<int,int>>());
+        
+        int maxDeadline = *max_element(deadline.begin(), deadline.end());
+        
+        vector<int> parent(maxDeadline+1);
+        for(int i=0;i<=maxDeadline;i++)
+            parent[i] = i;
+        
+        int count = 0, totalProfit = 0;
+        
+        for(auto &job : jobs){
+            int availableSlot = find(parent, job.second);
+            
+            if(availableSlot > 0){
+                count++;
+                totalProfit += job.first;
+                
+                parent[availableSlot] = find(parent, availableSlot-1);
+            }
+        }
+        
+        return {count, totalProfit};
+    }
+};
