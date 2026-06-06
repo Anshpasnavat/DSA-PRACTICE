@@ -1,0 +1,52 @@
+class Solution {
+  public:
+    int sol(int n,int m,int i,int j){
+        int total=n*m;
+        
+        //downright
+        if(i+2<=n && j+1 <=m){
+            total--;
+        }
+        //downleft
+        if(i+2<=n && j-1 >=1){
+            total--;
+        }
+        //upright
+        if(i-2>=1 && j+1 <=m){
+            total--;
+        }
+        //upleft
+        if(i-2>=1 && j-1 >=1){
+            total--;
+        }
+        //rightup
+        if(i-1>=1 && j+2 <=m){
+            total--;
+        }
+        //rightdown
+        if(i+1<=n && j+2 <=m){
+            total--;
+        }
+        //leftup
+        if(i-1>=1 && j-2 >= 1){
+            total--;
+        }
+        //lefttdown
+        if(i+1<=n && j-2 >= 1){
+            total--;
+        }
+        
+        
+        return total-1;
+    }
+    int numOfWays(int n, int m) {
+        int ans=0;
+        for(int i=1;i<=n;i++){
+            for(int j=1;j<=m;j++){
+                ans+=sol(n,m,i,j);
+            }
+        }
+        
+        return ans;
+    }
+};
