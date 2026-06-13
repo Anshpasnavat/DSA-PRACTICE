@@ -8,11 +8,11 @@ public:
             int sum = 0;
 
             // Compute the total weight of the current word.
-            * We need: remainder = sum % 26.
-             for (auto& c : word)
+            for (auto& c : word)
                 sum += weights[(c & 31) - 1];
 
             /*
+             * We need: remainder = sum % 26.
              *
              * Instead of using division, we approximate sum / 26
              * with a fixed-point reciprocal:
