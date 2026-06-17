@@ -1,24 +1,20 @@
 #include <iostream>
 using namespace std;
 
-int main() {
-    int n;
-    cout << "Enter the array length: ";
-    cin >> n;
-
-    int arr[n];
-
-    for(int i = 0; i < n; i++){
-        cin >> arr[i];
-    }
+int largest(int arr[], int n){
     int max = arr[0];
-
-    for(int i = 0; i < n; i++){
+    for(int i = 0; i<n;i++){
         if(arr[i]>max){
             max = arr[i];
-        }    
+        }
     }
-    cout <<"your largest value is: " << max;
+    return max;
+}
 
-    return 0;
+int main() {
+    int arr[] = {1, 2, 4, 6, 3};
+    int n = sizeof(arr) / sizeof(int); 
+    int result = largest(arr,n);
+    cout << result ;
+
 }
