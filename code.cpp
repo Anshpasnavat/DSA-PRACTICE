@@ -1,31 +1,24 @@
 #include <iostream>
 #include <unordered_set>
+#include <climits>
 using namespace std;
 
-bool twoSum(int arr[], int n, int target) {
-    unordered_set<int> s;
+int maxSum(int arr[], int n) {
 
     for(int i = 0; i < n; i++) {
-
-        int needed = target - arr[i];
-
-        if(s.find(needed) != s.end()) {
-            return true;
-        }
-
-        s.insert(arr[i]);
+            cout << arr[i]  << endl;
     }
+        
 
-    return false;
+    return 1;
 }
 
 int main() {
 
-    int arr[] = {2, 7, 11, 15};
+    int arr[] = {1, -2, 3, 4, -1};
     int n = sizeof(arr) / sizeof(arr[0]);
-    int target = 9;
 
-    cout << twoSum(arr, n, target);
+    cout << maxSum(arr, n);
 
     return 0;
 }
