@@ -1,24 +1,26 @@
 #include <iostream>
-#include <unordered_set>
-#include <climits>
 using namespace std;
+#include <climits>
 
-int maxSum(int arr[], int n) {
+int maxProfit(int price[], int n) {
+    int minPrice =price[0];
+    int maxProfit = 0;
+    int currProfit = 0;
 
     for(int i = 0; i < n; i++) {
-            cout << arr[i]  << endl;
+        minPrice = min(minPrice , price[i]);
+        currProfit = price[i]- minPrice;
+        maxProfit = max(maxProfit, currProfit);
     }
+    return maxProfit;
         
-
-    return 1;
 }
 
 int main() {
 
-    int arr[] = {1, -2, 3, 4, -1};
+    int arr[] = {7,1,5,3,6,4};
     int n = sizeof(arr) / sizeof(arr[0]);
-
-    cout << maxSum(arr, n);
+    cout << maxProfit(arr, n);
 
     return 0;
 }
