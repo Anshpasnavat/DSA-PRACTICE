@@ -1,26 +1,27 @@
 #include <iostream>
+#include <algorithm>
 using namespace std;
-#include <climits>
 
-int maxProfit(int price[], int n) {
-    int minPrice =price[0];
-    int maxProfit = 0;
-    int currProfit = 0;
+void mazorityElement(int arr[], int n) {
 
-    for(int i = 0; i < n; i++) {
-        minPrice = min(minPrice , price[i]);
-        currProfit = price[i]- minPrice;
-        maxProfit = max(maxProfit, currProfit);
+    for (int  i= 0; i < n; i++) {
+        int count = 0;
+        for(int j = 0;j<n;j++){
+            if (arr[i] == arr[j]) {
+                count++;
+            }
+        }
+        if(count > n/2){
+            cout << arr[i];
+            return;
+        }
     }
-    return maxProfit;
-        
+    cout << "Element not found";
 }
 
 int main() {
 
-    int arr[] = {7,1,5,3,6,4};
+    int arr[] = {1,2,2,2,1};
     int n = sizeof(arr) / sizeof(arr[0]);
-    cout << maxProfit(arr, n);
-
-    return 0;
+    mazorityElement(arr, n);
 }
