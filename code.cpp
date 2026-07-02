@@ -1,27 +1,22 @@
 #include <iostream>
 #include <algorithm>
+#include <unordered_set>
 using namespace std;
 
-void mazorityElement(int arr[], int n) {
-
-    for (int  i= 0; i < n; i++) {
-        int count = 0;
-        for(int j = 0;j<n;j++){
-            if (arr[i] == arr[j]) {
-                count++;
-            }
+bool containsDuplicate(int arr[], int n){
+    unordered_set<int> s;
+    for(int i = 0; i < n; i++){
+        if(s.find(arr[i]) != s.end()){
+            return true;
         }
-        if(count > n/2){
-            cout << arr[i];
-            return;
-        }
+        s.insert(arr[i]);
     }
-    cout << "Element not found";
+    return false;
 }
 
 int main() {
 
-    int arr[] = {1,2,2,2,1};
+    int arr[] = {1,4,3,2,1};
     int n = sizeof(arr) / sizeof(arr[0]);
-    mazorityElement(arr, n);
+    containsDuplicate(arr, n);
 }
