@@ -16,7 +16,7 @@ bool containsDuplicate(int arr[], int n){
 
 int main() {
 
-    int arr[] = {1,4,3,2,1};
+    int arr[] = {1,4,0,0,1};
     int n = sizeof(arr) / sizeof(arr[0]);
     containsDuplicate(arr, n);
 }
