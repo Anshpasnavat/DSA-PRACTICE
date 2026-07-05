@@ -1,22 +1,29 @@
 #include <iostream>
 #include <algorithm>
-#include <unordered_set>
 using namespace std;
 
-bool containsDuplicate(int arr[], int n){
-    unordered_set<int> s;
-    for(int i = 0; i < n; i++){
-        if(s.find(arr[i]) != s.end()){
-            return true;
-        }
-        s.insert(arr[i]);
-    }
-    return false;
-}
+int removeDuplicates(int arr[], int n)
+{
+    int i = 0;
 
+    for(int j = 1; j < n; j++)
+    {
+        if(arr[i]!=arr[j])
+        {
+            i++;
+            arr[i]=arr[j];
+        }
+    }
+
+    return i+1;
+}
 int main() {
 
-    int arr[] = {1,4,0,0,1};
+    int arr[] = {1,1,2,2,3,4,4};
     int n = sizeof(arr) / sizeof(arr[0]);
-    containsDuplicate(arr, n);
+    removeDuplicates(arr, n);
+    int newLength = removeDuplicates(arr, n);
+    for(int j = 0; j < ; j++) {
+        cout << arr[j] << " ";
+    }
 }
