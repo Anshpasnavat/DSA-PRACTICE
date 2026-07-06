@@ -1,0 +1,58 @@
+class Solution {
+  public:
+    int maxPathSum(vector<int> &a, vector<int> &b) {
+        // Code here
+        map<int,int> mp;
+        map<int,pair<int,int>> ind;
+        int n = a.size();
+        int m = b.size();
+        for(int i=0;i<n;i++)
+        {
+            mp[a[i]]++;
+            ind[a[i]]={i,-1};
+        }
+        for(int i=0;i<m;i++)
+        {
+            if(mp.find(b[i])!=mp.end())
+            {
+                pair<int,int> tmp = ind[b[i]];
+                int x = tmp.first;
+                ind[b[i]]={x,i};
+            }
+            mp[b[i]]++;
+        }
+        // ind[0]={-1,-1};
+        ind[INT_MAX]={n,m};
+        
+        for (auto it = ind.begin(); it != ind.end();){
+            if (it->second.second == -1) {
+                it = ind.erase(it); 
+            } else {
+                ++it; 
+            }
+        }
+        
+        for (auto it = mp.begin(); it != mp.end(); ) {
+            if (it->second != 2) {
+                it = mp.erase(it); 
+            } else {
+                ++it;
+            }
+        }
+        
+        int ans = 0;
+        int i=0,j=0;
+        for(auto k : ind)
+        {
+            int x = k.second.first;
+            int y = k.second.second;
+            int sum1 = 0, sum2 = 0;
+            while(i<x)sum1+=a[i++];
+            while(j<y)sum2+=b[j++];
+
+            ans += max(sum1,sum2);
+        }
+        
+        return ans;
+    }
+};
