@@ -2,28 +2,30 @@
 #include <algorithm>
 using namespace std;
 
-bool twoSum(int arr[],int n,int target)
+int maxArea(int arr[],int n)
 {
     int left = 0;
     int right = n- 1;
+    int maxArea = 0;
 
     while(left < right){
-        if(target < arr[left]+arr[right]){
-            right--;
-        }else if(target > arr[left]+arr[right]){
+        int width = right -left;
+        int smaller = min(arr[left], arr[right]);
+        currArea = width*smaller;
+        maxArea = max(maxArea,currArea);
+        if(arr[left]<=arr[right]){
             left++;
         }else{
-            return true;
+            right--;
         }
     
     }
-    return false;
+    return maxArea;
 }
 int main() {
 
-    int arr[] = {1, 2, 3,4,5,6,7};
+    int arr[] = {2,5,6,7,8,9,7};
     int n = sizeof(arr) / sizeof(int);
-    int target = 10;
-    cout << twoSum(arr, n, target);
+    cout << maxArea(arr, n);
 
 }
