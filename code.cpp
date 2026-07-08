@@ -2,30 +2,24 @@
 #include <algorithm>
 using namespace std;
 
-int maxArea(int arr[],int n)
+int maxSumSubarray(int arr[], int n, int k)
 {
-    int left = 0;
-    int right = n- 1;
-    int maxArea = 0;
+    int currSum= 0;
 
-    while(left < right){
-        int width = right -left;
-        int smaller = min(arr[left], arr[right]);
-        int currArea = width*smaller;
-        maxArea = max(maxArea,currArea);
-        if(arr[left]<=arr[right]){
-            left++;
-        }else{
-            right--;
-        }
-    
+    for(int i=0; i<k;i++){
+        currSum += arr[i];
+    }int maxSum = currSum;
+    for(int j = k; j<n;j++){
+        currSum = currSum - arr[j-k] + arr[j];
+        maxSum = max(currSum, maxSum);
     }
-    return maxArea;
+    return maxSum;
 }
 int main() {
 
-    int arr[] = {2,5,6,7,8,9,7};
+    int arr[] = {2,1,5,1,3,2};
     int n = sizeof(arr) / sizeof(int);
-    cout << maxArea(arr, n);
+    int k = 3;
+    cout << maxSumSubarray(arr, n, k);
 
 }
