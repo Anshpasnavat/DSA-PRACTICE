@@ -17,4 +17,4 @@ int main() {
     int result = evenNum(arr,n);
     cout << result ;
 
-}    
+} 
