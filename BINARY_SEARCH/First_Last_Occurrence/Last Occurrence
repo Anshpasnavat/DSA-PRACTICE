@@ -1,6 +1,6 @@
 class Solution {
   public:
-    int firstSearch(vector<int> &arr, int k) {
+    int lastSearch(vector<int> &arr, int k) {
         // code here
         int n = arr.size();
         int start = 0;
