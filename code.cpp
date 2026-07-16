@@ -1,63 +1,20 @@
-#include <iostream>
+#include<iostream>
+#include<climits>
 using namespace std;
-class Solution {
-  public:
-    int firstSearch(int arr[], int k, int n) {
-        // code here
-        int start = 0;
-        int end = n-1;
-        int ans = -1;
-        while(start<=end){
-            int mid = start+(end-start)/2;
-            if(arr[mid]==k){
-                ans = mid;
-                end = mid -1;
-            }else if(arr[mid]<k){
-                start = mid+1;
-            }else{
-                end = mid-1;
-            }
+
+int LargestNumber(int arr[] ,int n){
+    int max = INT_MAX;
+    for(int i = 0; i<n;i++){
+        if(arr[i]<max){
+            max = arr[i];
         }
-        return ans;
     }
-    int lastSearch(int arr[], int k, int n) {
-        // code here
-        int start = 0;
-        int end = n-1;
-        int ans = -1;
-        while(start<=end){
-            int mid = start+(end-start)/2;
-            if(arr[mid]==k){
-                ans = mid;
-                start = mid +1;
-            }else if(arr[mid]<k){
-                start = mid+1;
-            }else{
-                end = mid-1;
-            }
-        }
-        return ans;
-    }
-};
-
-
-
-int main() {
-    int arr[] = {1, 2, 2, 2, 3, 5, 6, 8};
-    int k = 2;
-    int n = sizeof(arr) / sizeof(int); 
-    Solution sol;
-    int first = sol.firstSearch(arr, k, n);
-
-if(first == -1)
-{
-    cout << 0;
+    return max;
 }
-else
-{
-    int last = sol.lastSearch(arr, k, n);
-    cout << last - first + 1;
-}
+
+int main(){
+    int arr[]= {2, 3, 4, 5, 6, 7, 8};
+    int n = sizeof(arr)/sizeof(int);
+    cout << LargestNumber(arr, n); 
     
-
-} 
+}
