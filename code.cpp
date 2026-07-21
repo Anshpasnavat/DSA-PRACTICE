@@ -1,25 +1,32 @@
-#include<iostream>
-#include<algorithm>
+#include <iostream>
+#include <unordered_set>
+#include <climits>
 using namespace std;
 
+int maxSum(int arr[], int n) {
+    int maxSum= INT_MIN;
+    int currSum = 0;
 
-int moveZeros(int arr[], int n){
-    int i = 0;
-    for(int j = 0;j<n;j++){
-        if(arr[j]!=0){
-            i++;
-            arr[i]=arr[j];
+    for(int i = 0; i < n; i++) {
+
+        currSum += arr[i];
+        maxSum = max(maxSum, currSum);
+
+        if(currSum<0) {
+            currSum = 0;
         }
-    }
-    return i+1;
-}    
 
-int main(){
-    int arr[]= {2,0,7,0,9,7,5};
-    int n = sizeof(arr)/sizeof(int);
-    int newLength = moveZeros(arr, n);
-    for(int i=0;i<newLength;i++){
-        cout << arr[i];
     }
 
- }
+    return maxSum;
+}
+
+int main() {
+
+    int arr[] = {1, -2, 3, 4, -1};
+    int n = sizeof(arr) / sizeof(arr[0]);
+
+    cout << maxSum(arr, n);
+
+    return 0;
+}
