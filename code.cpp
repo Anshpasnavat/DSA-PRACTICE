@@ -1,27 +1,27 @@
 #include<iostream>
-#include<utility>
 #include<climits>
 using namespace std;
 
-int findMin(int  nums[], int n) {
-        int left = 0;
-        int right = n-1;
-        int minVal = INT_MAX;
-        while(left<=right){
-            int mid = left+(right-left)/2;
-            if(nums[left]<nums[mid]){
-                if(nums[mid]>nums[right]){
-                    left = mid + 1;
-                    minVal = min(minVal, nums[mid+1]);
-                }
-            }else{
-                if(val)
-            }
-        }return minVal;
+int lastOccurence(int arr[], int n, int target){
+    int left = 0;
+    int right = n-1;
+    while(left<=right){
+        int mid = left+(right-left)/2;
+        if(arr[mid]<=target){
+            left = mid +1; 
+        }else{
+            right = mid - 1;
+        }
+    }if(right>=0&& arr[right] == target ){
+        return right;
+    }else{
+        return -1;
     }
+}
 
 int main(){
-    int nums[] = {3,4,5,1,2};
-    int n = sizeof(nums)/sizeof(int);
-    cout << findMin(nums, n);
+    int arr[] = {1,3,3,3,4,4,5,5,5,5,7,9};
+    int n  = sizeof(arr)/sizeof(int);
+    int target = 3;
+    cout << lastOccurence(arr , n , target);
 }

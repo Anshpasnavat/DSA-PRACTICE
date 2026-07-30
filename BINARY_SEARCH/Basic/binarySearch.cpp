@@ -1,29 +1,26 @@
-#include <iostream>
+#include<iostream>
+#include<climits>
 using namespace std;
 
-int binSer(int arr[], int n, int target){
-    int start = 0;
-    int end = n-1;
-    while(start<=end){
-        int mid = start + (end - start) / 2;
+int binarySearch(int arr[], int n, int target){
+    int left = 0;
+    int right = n-1;
+    while(left<=right){
+        int mid = left+(right-left)/2;
         if(arr[mid] == target){
             return mid;
-        }else if(arr[mid] < target){
-            start =  mid + 1;
-        }else{
-            end = mid - 1;
         }
-        
-    }
-    return -1;
-
+        if(arr[mid]>target){
+            right = mid - 1; 
+        }else{
+            left = mid +1;
+        }
+    }return -1;
 }
 
-int main() {
-    int arr[] = {1, 2, 3, 5, 6, 8};
-    int target = 5;
-    int n = sizeof(arr) / sizeof(int); 
-    int result = binSer(arr,n,target);
-    cout << result ;
-
-} 
+int main(){
+    int arr[] = {1,3,5,7,9};
+    int n  = sizeof(arr)/sizeof(int);
+    int target = 7;
+    cout << binarySearch(arr , n , target);
+}
