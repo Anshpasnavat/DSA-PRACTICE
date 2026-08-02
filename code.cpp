@@ -1,35 +1,22 @@
 #include <iostream>
-#include <algorithm>
-#include<climits>
+#include <unordered_set>
 using namespace std;
 
-int maxSumSubarray(int arr[], int n, int target)
-{
-    int currSum= 0;
-    int left = 0;
-    int ans = INT_MAX;
-
-    for(int right=0; right<n;right++){
-        currSum += arr[right];
-        while(currSum >= target){
-            int length = right - left +1;
-            ans = min(ans, length) ;
-            currSum -= arr[left];
-            left ++;
+int containDuplicate(int arr[], int n){
+    std::unordered_set<int> m;
+    for(int i = 0; i < n; i++){
+        if(m.find(arr[i]) != m.end()){
+            return true;
         }
-    }if(ans == INT_MAX){
-    return 0;
-}else{
-    return ans;
+        m.insert(arr[i]);
+    }
+    return false;
 }
-}
-
 
 int main() {
 
     int arr[] = {2,1,5,1,3,2};
     int n = sizeof(arr) / sizeof(int);
-    int target = 9;
-    cout << maxSumSubarray(arr, n, target);
+    cout << containDuplicate(arr, n);
 
 }
