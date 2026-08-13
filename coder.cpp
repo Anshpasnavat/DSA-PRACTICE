@@ -1,25 +1,18 @@
 #include <iostream>
-#include<climits>
 using namespace std;
 
-int secondSmaleest(int arr[], int n){
-    int second ;
-    int first = arr[0];
-    for(int j = 1; j<n;j++){
-        if(arr[j]<first){
-            second = first ;
-            first = arr[j];
-        }else if(arr[j]<second){
-            second = arr[j];
+int missingNumber(int arr[], int n){
+    for(int i=0;i<n;i++){
+        if(arr[i+1]-arr[i]!=1){
+            return i+2;
         }
-    }return second;
 
-    
+    } return -1;
 }
 
 int main() {
-    int arr[] = {8, 3, 10, 2, 6};
+    int arr[] = {1, 2, 4, 5, 6};
     int n = sizeof(arr) / sizeof(int);
-    cout << secondSmaleest(arr, n);
+    cout << missingNumber(arr, n);
     
 }
