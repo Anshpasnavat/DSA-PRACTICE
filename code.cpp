@@ -1,24 +1,31 @@
 #include <iostream>
 #include <utility>
+#include<unordered_map>
 using namespace std;
 
-int removeDuplicates(int arr[], int n){
-    int i = 0 ;
-    for(int j = 1; j<n;j++){
-        if(arr[i]!=arr[j]){
-            i++;
-            arr[i]=arr[j];
-        }
-    }return i+1;
+pair<int, int> TwoSum(int arr[], int n, int target) {
+    unordered_map<int, int> s;
 
-    
+    for (int i = 0; i < n; i++) {
+        s[arr[i]] = i;
+    }
+
+    for (int i = 0; i < n; i++) {
+        int x = target - arr[i];
+        if (s.find(x) != s.end() && s[x] != i) {
+            return {i, s[x]};
+        }
+    }
+
+    return {-1, -1};
 }
 
 int main() {
-    int arr[] = {1, 1, 2, 2, 3, 4, 4, 5};
+    int arr[] = {2, 7, 11, 15};
     int n = sizeof(arr) / sizeof(int);
-    int newlength = removeDuplicates(arr, n);
-    for(int i = 0;i < newlength;i++){
-        cout << arr[i] << " ";
-    }
+    int target = 9;
+
+    pair<int, int> ans = TwoSum(arr, n, target);
+    cout << "(" << ans.first << ", " << ans.second << ")" << endl;
+    return 0;
 }
