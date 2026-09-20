@@ -1,18 +1,20 @@
 #include <iostream>
+#include<climits>
 using namespace std;
 
-int missingNumber(int arr[], int n){
+int largestElement(int arr[], int n){
+    int largest = INT_MIN;
     for(int i=0;i<n;i++){
-        if(arr[i+1]-arr[i]!=1){
-            return i+2;
+        if(arr[i]>largest){
+            largest = arr[i];
         }
 
-    } return -1;
+    }return largest;
 }
 
 int main() {
-    int arr[] = {1, 2, 4, 5, 6};
+    int arr[] = {10, 25, 7, 42, 18};
     int n = sizeof(arr) / sizeof(int);
-    cout << missingNumber(arr, n);
+    cout << largestElement(arr, n);
     
 }
