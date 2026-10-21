@@ -1,0 +1,31 @@
+class Solution {
+
+  public:
+
+    int minSubarraySum(vector<int> &arr) {
+
+        // Abhi Vode Karo
+
+        int n = arr.size();
+
+        int ans = 1e8;
+
+        int cSum = 1e8;
+
+
+
+        for(int i=0; i<n; i++){
+
+            cSum = min(cSum + arr[i], arr[i]);
+
+
+
+            ans = min(ans, cSum);
+
+        }
+
+        return ans;
+
+    }
+
+};
